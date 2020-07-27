@@ -8,3 +8,17 @@ const login = () => {
     socket.emit('login', {id, username});
     toWaitingRoom();
 };
+
+socket.on('users', (users) => {
+    update_users(users);
+});
+
+function update_users(users) {
+    let usersDiv = document.getElementById('users');
+    usersDiv.innerHTML = "";
+    users.forEach( ({id, username}) => {
+        usersDiv.innerHTML += `<p> 
+            ${username}
+        </p>`;
+    });   
+};
