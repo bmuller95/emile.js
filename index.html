@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMile !!</title>
-    <script src="./rules.js"> </script>
+    <title> Let's play Emile ! </title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link href="/styles.css" rel="stylesheet" />
+    
 </head>
 <body>
-    Salut les coco
+    <div id="root">
+
+        <div id="login"> 
+            <input type="text" id="username" name="username" placeholder="enter your username"><br><br>
+            <button onclick="login()"> Login </button>
+        </div>
+
+    </div>
 </body>
+<script src="./socket.js"> </script>
+<script src="./rules.js"> </script>
+<script src="./utils.js"> </script>
+<script src="./ui.js"> </script>
 </html>
