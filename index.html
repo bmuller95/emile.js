@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Let's play Emile ! </title>
     <script src="/socket.io/socket.io.js"></script>
-    <link href="/styles.css" rel="stylesheet" />
-    
+    <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <div id="root">
 
+<body>
+    <div id="header">
+        <div id="header_title">
+            <h1>Welcome to Emile</h1>
+        </div>
         <div id="login"> 
-            <input type="text" id="username" name="username" placeholder="enter your username"><br><br>
+            <input type="text" id="username" name="username" placeholder="enter your username">
+            <br>
             <button onclick="login()"> Login </button>
         </div>
+    </div>
+    <div id="root">
+        <div id="users">
 
+        </div>
+        <div id="chat">
+
+        </div>
+        <div id="rules">
+
+        </div>
     </div>
 </body>
+
 <script src="./rules.js"> </script>
 <script src="./utils.js"> </script>
 <script src="./ui.js"> </script>
 <script src="./socket.js"> </script>
+
 </html>

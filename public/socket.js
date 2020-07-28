@@ -4,20 +4,28 @@ const verify_user = () => {
     let cache = getLocalStorage('emile');
     if (!cache) return;
     socket.emit('login', cache);
-    toWaitingRoom();
+    renderLogged();
 };
 
 verify_user();
 
 const login = () => {
     let input = document.getElementById('username');
-    let username = input ? input.value : 'user';
+    let username = input.value ? input.value : "user";
     let id = generate_id();
 
     setLocalStorage('emile', {id, username});
 
     socket.emit('login', {id, username});
-    toWaitingRoom();
+    renderLogged();
+};
+
+const logout = () => {
+    let cache = getLocalStorage('emile');
+    if (!cache) return
+    delLocalStorage('emile');
+    socket.emit('logout',cache);
+    renderLoggedOut();
 };
 
 socket.on('users', (users) => {

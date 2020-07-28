@@ -15,14 +15,25 @@ http.listen(port, () => {
 io.on('connection', (socket) => {
     console.log(`${socket.id} connected`);
 
-    socket.on('login', (data) => {
-        socket.user = data;
-        emit_users();
+    socket.on('login', ({id, username}) => {
+        socket.user = {id, username};
+        let users = get_users();
+        io.emit('users', users);
+    });
+
+    socket.on('logout', (user) => {
+        console.log(`${user.username} logged out`);
+        let users = get_users();
+        users = users.filter((obj) => {
+            return obj.id !== user.id;
+          });
+        io.emit('users', users);
     });
 
     socket.on('disconnect', () => {
         console.log(`${socket.id} disconnected`);
-        emit_users();
+        let users = get_users();
+        io.emit('users', users);
     });
 });
 
@@ -37,10 +48,7 @@ app.get('/', (req, res) => {
 function get_users() {
     let clients = io.sockets.clients().connected;
     let sockets = Object.values(clients)
-    return sockets.map(element => element.user)
+    return sockets.map(socket => socket.user)
 };
 
-function emit_users(){
-    let users = get_users();
-    io.emit('users', users);
-}
+
